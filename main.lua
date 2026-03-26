@@ -7,7 +7,7 @@ local args = {...}
 print("Welcome to the Falcon special environment.")
 
 
-if arg[1] == "recover" then
+if args[1] == "recover" then
     print("Falcon SE is starting in recovery mode...")
     print("Running shell ...")
     shell.execute("shell")
