@@ -3,12 +3,11 @@
     Falcon SE main program. This is the entry point for the Falcon SE environment.
 --]]
 
--- Shows an error and end sthe program.
+-- Shows an error.
 local function showError(error_code, additional_info)
     print("An error has occured.")
     print("Error code: " .. error_code)
     print("Additional info: " .. additional_info)
-    return
 end
 
 local function getDiskDrive()
@@ -20,14 +19,14 @@ local function getDiskDrive()
         sleep(1)
         disk_drive = peripheral.find("drive")
     end
-    print("Disk found! Continuing with installation.")
+    print("Disk Drive found! Continuing with installation.")
 
     -- Disk check
     while not disk_drive.isDiskPresent() do
-        print("Disk not found!")
+        print("Disk not found! Please insert a disk!")
         sleep(1)
     end
-    print("Disk found!")
+    print("Disk found! Continuing with installation.")
 
     return disk_drive
 end
@@ -46,12 +45,13 @@ end
 
 if args[1] == "installToDrive" then
     local installUrl = args[2]
-    local fileName
+    local fileName = args[3]
     local diskDrive = getDiskDrive()
 
     -- Check for HTTP
     if not http then
         showError("NO_HTTP", "Turn on HTTP for your world.")
+        return
     end
 
     -- Send a request
@@ -65,10 +65,11 @@ if args[1] == "installToDrive" then
     -- Check if fs.open returns nil
     if not file then
         showError("FILE_ERROR", "File cannot be opened. Make sure the disk is not read only and there is space on disk.")
+        return
     end
 
-    fs.write(code)
-    fs.close()
+    file.write(code)
+    file.close()
 
     diskDrive.ejectDisk()
     print("Done installing! You may now use your program.")
