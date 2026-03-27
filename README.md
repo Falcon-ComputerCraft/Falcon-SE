@@ -8,6 +8,6 @@ Text wrapped in brackets [like this] needs to be replaced with what you need. Fo
 
 |Argument #|Recovery |Install single file to disk
 |--|--|--|
-|Arg 1 | recover | InstallToDriveSF   |
+|Arg 1 | recover | installToDriveSF   |
 |Arg 2 | N/A | [InstallURL]  |
 |Arg 3 | N/A | [FileNameOnceOnDrive]  |
