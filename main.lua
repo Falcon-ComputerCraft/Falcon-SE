@@ -43,7 +43,7 @@ if args[1] == "recover" then
     os.reboot()
 end
 
-if args[1] == "installToDrive" then
+if args[1] == "installToDriveSF" then
     local installUrl = args[2]
     local fileName = args[3]
     local diskDrive = getDiskDrive()
@@ -60,7 +60,7 @@ if args[1] == "installToDrive" then
     request.close()
 
     -- Write to the file.
-    local file = fs.open(diskDrive.getMountPath() .. fileName, "w")
+    local file = fs.open(diskDrive.getMountPath() .. "/" .. fileName, "w")
     
     -- Check if fs.open returns nil
     if not file then
